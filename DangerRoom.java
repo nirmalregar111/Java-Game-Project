@@ -19,13 +19,16 @@ public class DangerRoom extends Room {
         } catch (Exception e) {
             System.out.println("⚠ Invalid input! You got confused!");
             player.reduceHealth(10);
+            player.showStatus();
             return;
         }
 
         if (choice == 1) {
             System.out.println("You got hurt! Lost 30 health.");
             player.reduceHealth(30);
-        } else {
+            player.addScore(20);   // ✅ score only when fight
+        } 
+        else {
             System.out.println("You escaped safely.");
         }
 

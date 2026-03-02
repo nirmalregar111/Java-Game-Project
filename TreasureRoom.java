@@ -24,7 +24,9 @@ public class TreasureRoom extends Room {
         if (choice == 1) {
             System.out.println("🎉 You found the hidden key!");
             player.setKey(true);
-        } else {
+            player.addScore(50);   // ✅ score only when key found
+        } 
+        else {
             System.out.println("Nothing happened.");
         }
 

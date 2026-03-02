@@ -3,12 +3,17 @@ public class Player {
     private String name;
     private int health;
     private boolean hasKey;
+    private int score;
+    private int level;
     
     //constructor
     public Player(String name) {
         this.name = name;
         this.health = 100;
         this.hasKey = false;
+        this.score = 0;
+        this.level = 1;
+
     }
 
     // Health reduce method
@@ -32,9 +37,30 @@ public class Player {
         return health;
     }
 
+    public void addScore(int points) {
+    score += points;
+
+    if (score >= 50) {
+        level = 2;
+    }
+    if (score >= 100) {
+        level = 3;
+    }
+}
+
+public int getScore() {
+    return score;
+}
+
+public int getLevel() {
+    return level;
+}
+
     public void showStatus() {
         System.out.println("Player: " + name);
         System.out.println("Health: " + health);
         System.out.println("Has Key: " + hasKey);
+        System.out.println("Level:" + level);
+        System.out.println("Score:" + score);
     }
 }
