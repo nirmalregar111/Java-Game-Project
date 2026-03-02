@@ -11,8 +11,16 @@ public class DangerRoom extends Room {
         System.out.println("1. Fight monster");
         System.out.println("2. Run away");
 
-        System.out.print("Choose option: ");
-        int choice = Integer.parseInt(sc.nextLine());
+        int choice = 0;
+
+        try {
+            System.out.print("Choose option: ");
+            choice = Integer.parseInt(sc.nextLine());
+        } catch (Exception e) {
+            System.out.println("⚠ Invalid input! You got confused!");
+            player.reduceHealth(10);
+            return;
+        }
 
         if (choice == 1) {
             System.out.println("You got hurt! Lost 30 health.");

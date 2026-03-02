@@ -11,8 +11,15 @@ public class TreasureRoom extends Room {
         System.out.println("1. Open treasure chest");
         System.out.println("2. Leave it");
 
-        System.out.print("Choose option: ");
-        int choice = Integer.parseInt(sc.nextLine());
+        int choice = 0;
+
+        try {
+            System.out.print("Choose option: ");
+            choice = Integer.parseInt(sc.nextLine());
+        } catch (Exception e) {
+            System.out.println("⚠ Invalid input! Try again next time.");
+            return;
+        }
 
         if (choice == 1) {
             System.out.println("🎉 You found the hidden key!");
