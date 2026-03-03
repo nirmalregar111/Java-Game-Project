@@ -22,6 +22,18 @@ public class Game {
 
         while (!player.hasKey() && player.getHealth() > 0) {
 
+            if (player.getLevel() == 3) {
+
+                Room boss = new BossRoom();
+
+                // 👑 Boss fight continues until win or death
+                while (!player.hasKey() && player.getHealth() > 0) {
+                    boss.enterRoom(player);
+                }
+
+                break;
+            }
+
             Room room;
 
             if (random.nextInt(2) == 0) {
