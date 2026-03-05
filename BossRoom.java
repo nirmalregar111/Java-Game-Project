@@ -2,15 +2,18 @@ import java.util.Scanner;
 
 public class BossRoom extends Room {
 
+    private int bossHealth = 150;
+
     @Override
     public void enterRoom(Player player) {
 
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\n👑 FINAL BOSS ROOM!");
-        System.out.println("1. Fight Final Boss");
+        System.out.println("Boss Health: " + bossHealth);
+
+        System.out.println("1. Attack Boss");
         System.out.println("2. Use Potion");
-        System.out.println("3. Try to Escape");
 
         int choice = 0;
 
@@ -26,24 +29,39 @@ public class BossRoom extends Room {
 
         if (choice == 1) {
 
-            int bossDamage = 60;
+            int playerDamage = 40;
 
-            System.out.println("💥 Boss attacked! Lost " + bossDamage + " health.");
-            player.reduceHealth(bossDamage);
+            bossHealth -= playerDamage;
 
-            if (player.getHealth() > 0) {
-                System.out.println("🔥 You defeated the Final Boss!");
-                player.addScore(100);
+            System.out.println("⚔️ You attacked the boss! -" + playerDamage + " HP");
+
+            if (bossHealth <= 0) {
+
+                System.out.println("🔥 Boss defeated!");
                 player.setKey(true);
+                player.addScore(100);
+
+            } else {
+
+                int bossDamage = 35;
+
+                System.out.println("💥 Boss attacked! -" + bossDamage + " HP");
+
+                player.reduceHealth(bossDamage);
             }
 
-        } else if (choice == 2) {
+        } 
+        else if (choice == 2) {
+
             player.usePotion();
-        } else {
-            System.out.println("❌ You cannot escape the boss!");
-            player.reduceHealth(40);
+
+        } 
+        else {
+
+            System.out.println("Invalid action!");
         }
 
+        System.out.println("Boss Health: " + bossHealth);
         player.showStatus();
     }
 }
