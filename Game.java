@@ -1,24 +1,17 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class Game {
 
     private Player player;
-    private Scanner sc;
     private Random random;
 
     public Game() {
-        sc = new Scanner(System.in);
         random = new Random();
     }
 
-    public void start() {
+    public void start(String playerName) {
 
-        System.out.println("Welcome to The Hidden Key Game!");
-        System.out.print("Enter your name: ");
-        String name = sc.nextLine();
-
-        player = new Player(name);
+        player = new Player(playerName);
 
         while (!player.hasKey() && player.getHealth() > 0) {
 
@@ -26,7 +19,6 @@ public class Game {
 
                 Room boss = new BossRoom();
 
-                // 👑 Boss fight continues until win or death
                 while (!player.hasKey() && player.getHealth() > 0) {
                     boss.enterRoom(player);
                 }
@@ -38,7 +30,8 @@ public class Game {
 
             if (random.nextInt(2) == 0) {
                 room = new DangerRoom();
-            } else {
+            }
+            else {
                 room = new TreasureRoom();
             }
 
@@ -49,10 +42,13 @@ public class Game {
     }
 
     private void endGame() {
+
         if (player.hasKey()) {
             System.out.println("\n🏆 CONGRATULATIONS! YOU WIN!");
-        } else {
+        }
+        else {
             System.out.println("\n💀 GAME OVER!");
         }
+
     }
 }
