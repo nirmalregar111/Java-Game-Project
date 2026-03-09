@@ -42,7 +42,7 @@ public class GameUI extends JFrame {
         titleLabel.setFont(new Font("Serif", Font.BOLD, 120));
         titleLabel.setForeground(new Color(255, 215, 0)); // Gold color
         titleLabel.setPreferredSize(new Dimension(1200, 300));
-        titleLabel.setBorder(BorderFactory.createEmptyBorder(40,0,40,0));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(40, 0, 40, 0));
 
         bgPanel.add(titleLabel, gbc);
 
@@ -54,27 +54,14 @@ public class GameUI extends JFrame {
 
         startButton.addActionListener(e -> {
 
-    String name = JOptionPane.showInputDialog(
-            this,
-            "Enter your name:",
-            "Player Name",
-            JOptionPane.PLAIN_MESSAGE
-    );
+            String name = JOptionPane.showInputDialog(this, "Enter your name");
 
-    if (name != null && !name.trim().isEmpty()) {
+            if (name != null && !name.isEmpty()) {
+                dispose();
+                new GameScreen(name);
+            }
 
-        dispose(); // menu close
-
-        try {
-            Game game = new Game();
-            game.start(name);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-});
+        });
 
         addButton(startButton, gbc);
 
@@ -108,7 +95,6 @@ public class GameUI extends JFrame {
             bgPanel.repaint();
         });
         animationTimer.start();
-
         setVisible(true);
     }
 
