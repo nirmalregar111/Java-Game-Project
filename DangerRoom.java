@@ -1,11 +1,7 @@
-import java.util.Scanner;
-
 public class DangerRoom extends Room {
 
     @Override
     public void enterRoom(Player player) {
-
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("\n🔥 You entered a dangerous room!");
         System.out.println("1. Fight monster");
@@ -39,8 +35,11 @@ public class DangerRoom extends Room {
             player.reduceHealth(damage);
             player.addScore(20);
 
-        } else {
+        } else if (choice == 2) {
             System.out.println("You escaped safely.");
+        } else {
+            System.out.println("⚠ Invalid choice! Monster attacked!");
+            player.reduceHealth(10);
         }
 
         player.showStatus();
