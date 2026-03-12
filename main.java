@@ -8,8 +8,8 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        playerName = sc.nextLine();
         System.out.println("Enter Your name:");
+        playerName = sc.nextLine();
 
         System.out.println("\n================================");
         System.out.println("WELCOME " + playerName.toUpperCase());

@@ -66,6 +66,14 @@ public class Player {
         }
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public int getPotions() {
+        return potions;
+    }
+
     public void showStatus() {
         System.out.println("Player: " + name);
         System.out.println("Health: " + health);

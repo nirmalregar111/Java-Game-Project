@@ -42,20 +42,24 @@ public class GameEngine {
 
     public String nextRoom() {
 
+        if (room >= 4) {
+            return "Game finished.";
+        }
+
         room++;
 
-        if(room == 3 && player.hasKey()) {
-
-            return "👑 Boss Room reached! Prepare for final fight!";
+        if (room == 3) {
+            if (player.hasKey()) {
+                return "👑 Boss Room reached! Prepare for final fight!";
+            }
+            return "⚠ Room 3: You need the key to proceed further! Search this room.";
         }
 
-        if(room == 4 && player.hasKey()) {
-
-            return "🏆 YOU ESCAPED THE DUNGEON! YOU WIN!";
-        }
-
-        if(room > 4) {
-            return "Game finished.";
+        if (room == 4) {
+            if (player.hasKey()) {
+                return "🏆 YOU ESCAPED THE DUNGEON! YOU WIN!";
+            }
+            return "🔒 The dungeon exit is locked! Find the hidden key first.";
         }
 
         return "➡ You moved to room " + room;
