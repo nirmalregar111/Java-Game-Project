@@ -45,10 +45,12 @@ public class Game {
 
         if (player.hasKey()) {
             System.out.println("\n🏆 CONGRATULATIONS! YOU WIN!");
-        }
-        else {
+            System.out.println("You found the hidden key and escaped the dungeon!");
+        } else {
             System.out.println("\n💀 GAME OVER!");
+            System.out.println("You were defeated in the dungeon...");
         }
 
+        player.showStatus();
     }
 }
