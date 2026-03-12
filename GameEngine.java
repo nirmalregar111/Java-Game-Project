@@ -7,12 +7,18 @@ public class GameEngine {
     private boolean keyFound = false;
     private int room = 1;
 
+    private boolean gameWon = false;
+
     public GameEngine(String name) {
         player = new Player(name);
         random = new Random();
     }
 
     public String searchRoom() {
+
+        if (gameWon || player.getHealth() <= 0) {
+            return "The game is already over.";
+        }
 
         if (keyFound) {
             return "You already found the key.";
@@ -42,6 +48,10 @@ public class GameEngine {
 
     public String nextRoom() {
 
+        if (gameWon || player.getHealth() <= 0) {
+            return "The game is already over.";
+        }
+
         room++;
 
         if(room == 3 && player.hasKey()) {
@@ -51,6 +61,7 @@ public class GameEngine {
 
         if(room == 4 && player.hasKey()) {
 
+            gameWon = true;
             return "🏆 YOU ESCAPED THE DUNGEON! YOU WIN!";
         }
 
@@ -59,6 +70,10 @@ public class GameEngine {
         }
 
         return "➡ You moved to room " + room;
+    }
+
+    public boolean isGameWon() {
+        return gameWon;
     }
 
     public Player getPlayer() {
