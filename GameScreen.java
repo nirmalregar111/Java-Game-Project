@@ -7,6 +7,8 @@ public class GameScreen extends JFrame {
     private JLabel healthLabel;
     private JLabel levelLabel;
     private JLabel keyLabel;
+    private JLabel scoreLabel;
+    private JLabel potionLabel;
 
     private GameEngine engine;
 
@@ -22,15 +24,19 @@ public class GameScreen extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(1,3));
+        topPanel.setLayout(new GridLayout(2,3));
 
         healthLabel = new JLabel();
         levelLabel = new JLabel();
         keyLabel = new JLabel();
+        scoreLabel = new JLabel();
+        potionLabel = new JLabel();
 
         topPanel.add(healthLabel);
         topPanel.add(levelLabel);
         topPanel.add(keyLabel);
+        topPanel.add(scoreLabel);
+        topPanel.add(potionLabel);
 
         add(topPanel,BorderLayout.NORTH);
 
@@ -46,9 +52,11 @@ public class GameScreen extends JFrame {
 
         JButton searchBtn = new JButton("Search Room");
         JButton nextBtn = new JButton("Next Room");
+        JButton potionBtn = new JButton("Use Potion");
 
         buttonPanel.add(searchBtn);
         buttonPanel.add(nextBtn);
+        buttonPanel.add(potionBtn);
 
         add(buttonPanel,BorderLayout.SOUTH);
 
@@ -59,6 +67,19 @@ public class GameScreen extends JFrame {
 
         nextBtn.addActionListener(e -> {
             gameLog.append(engine.nextRoom() + "\n");
+            updateStats();
+        });
+
+        potionBtn.addActionListener(e -> {
+            Player p = engine.getPlayer();
+            if (p.getPotions() > 0) {
+                int healthBefore = p.getHealth();
+                p.usePotion();
+                int healed = p.getHealth() - healthBefore;
+                gameLog.append("🧪 Potion used! +" + healed + " Health\n");
+            } else {
+                gameLog.append("❌ No potions available!\n");
+            }
             updateStats();
         });
 
@@ -74,6 +95,8 @@ public class GameScreen extends JFrame {
         healthLabel.setText("❤️ Health: " + p.getHealth());
         levelLabel.setText("🏰 Level: " + p.getLevel());
         keyLabel.setText("🗝 Key: " + (p.hasKey() ? "YES" : "NO"));
+        scoreLabel.setText("⭐ Score: " + p.getScore());
+        potionLabel.setText("🧪 Potions: " + p.getPotions());
 
     }
 }
