@@ -2,10 +2,14 @@ import java.util.Scanner;
 
 public class DangerRoom extends Room {
 
+    private final Scanner sc;
+
+    public DangerRoom(Scanner scanner) {
+        this.sc = scanner;
+    }
+
     @Override
     public void enterRoom(Player player) {
-
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("\n🔥 You entered a dangerous room!");
         System.out.println("1. Fight monster");

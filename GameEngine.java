@@ -14,6 +14,14 @@ public class GameEngine {
 
     public String searchRoom() {
 
+        if (isGameOver()) {
+            return "💀 Game over! You have no health remaining.";
+        }
+
+        if (isWon()) {
+            return "🏆 You have already escaped the dungeon!";
+        }
+
         if (keyFound) {
             return "You already found the key.";
         }
@@ -32,6 +40,10 @@ public class GameEngine {
 
             player.reduceHealth(damage);
 
+            if (player.getHealth() <= 0) {
+                return "👹 Enemy attacked! You lost " + damage + " health. 💀 You have been defeated!";
+            }
+
             return "👹 Enemy attacked! You lost " + damage + " health.";
         }
 
@@ -42,23 +54,37 @@ public class GameEngine {
 
     public String nextRoom() {
 
-        room++;
+        if (isGameOver()) {
+            return "💀 Game over! You have no health remaining.";
+        }
 
-        if(room == 3 && player.hasKey()) {
+        if (isWon()) {
+            return "🏆 You have already escaped the dungeon!";
+        }
+
+        if (room < 4) {
+            room++;
+        }
+
+        if (room == 3 && player.hasKey()) {
 
             return "👑 Boss Room reached! Prepare for final fight!";
         }
 
-        if(room == 4 && player.hasKey()) {
+        if (room >= 4 && player.hasKey()) {
 
             return "🏆 YOU ESCAPED THE DUNGEON! YOU WIN!";
         }
 
-        if(room > 4) {
-            return "Game finished.";
-        }
+        return "➡ You moved to room " + room + (room >= 4 ? ". Keep searching for the key!" : "");
+    }
 
-        return "➡ You moved to room " + room;
+    public boolean isGameOver() {
+        return player.getHealth() <= 0;
+    }
+
+    public boolean isWon() {
+        return player.hasKey() && room >= 4;
     }
 
     public Player getPlayer() {

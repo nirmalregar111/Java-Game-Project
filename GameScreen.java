@@ -9,6 +9,8 @@ public class GameScreen extends JFrame {
     private JLabel keyLabel;
 
     private GameEngine engine;
+    private JButton searchBtn;
+    private JButton nextBtn;
 
     public GameScreen(String playerName) {
 
@@ -44,8 +46,8 @@ public class GameScreen extends JFrame {
 
         JPanel buttonPanel = new JPanel();
 
-        JButton searchBtn = new JButton("Search Room");
-        JButton nextBtn = new JButton("Next Room");
+        searchBtn = new JButton("Search Room");
+        nextBtn = new JButton("Next Room");
 
         buttonPanel.add(searchBtn);
         buttonPanel.add(nextBtn);
@@ -55,11 +57,13 @@ public class GameScreen extends JFrame {
         searchBtn.addActionListener(e -> {
             gameLog.append(engine.searchRoom() + "\n");
             updateStats();
+            checkGameEnd();
         });
 
         nextBtn.addActionListener(e -> {
             gameLog.append(engine.nextRoom() + "\n");
             updateStats();
+            checkGameEnd();
         });
 
         updateStats();
@@ -75,5 +79,19 @@ public class GameScreen extends JFrame {
         levelLabel.setText("🏰 Level: " + p.getLevel());
         keyLabel.setText("🗝 Key: " + (p.hasKey() ? "YES" : "NO"));
 
+    }
+
+    private void checkGameEnd() {
+        if (engine.isGameOver()) {
+            searchBtn.setEnabled(false);
+            nextBtn.setEnabled(false);
+            gameLog.setForeground(Color.RED);
+            gameLog.append("\n💀 GAME OVER! Better luck next time.\n");
+        } else if (engine.isWon()) {
+            searchBtn.setEnabled(false);
+            nextBtn.setEnabled(false);
+            gameLog.setForeground(new Color(255, 215, 0));
+            gameLog.append("\n🏆 CONGRATULATIONS! YOU ESCAPED THE DUNGEON!\n");
+        }
     }
 }
