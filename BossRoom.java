@@ -5,9 +5,7 @@ public class BossRoom extends Room {
     private int bossHealth = 150;
 
     @Override
-    public void enterRoom(Player player) {
-
-        Scanner sc = new Scanner(System.in);
+    public void enterRoom(Player player, Scanner sc) {
 
         System.out.println("\n👑 FINAL BOSS ROOM!");
         System.out.println("Boss Health: " + bossHealth);
@@ -61,7 +59,9 @@ public class BossRoom extends Room {
             System.out.println("Invalid action!");
         }
 
-        System.out.println("Boss Health: " + bossHealth);
+        if (bossHealth > 0) {
+            System.out.println("Boss Health: " + bossHealth);
+        }
         player.showStatus();
     }
 }
