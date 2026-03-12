@@ -7,6 +7,7 @@ public class GameScreen extends JFrame {
     private JLabel healthLabel;
     private JLabel levelLabel;
     private JLabel keyLabel;
+    private JLabel scoreLabel;
 
     private GameEngine engine;
 
@@ -22,14 +23,16 @@ public class GameScreen extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(1,3));
+        topPanel.setLayout(new GridLayout(1,4));
 
         healthLabel = new JLabel();
         levelLabel = new JLabel();
         keyLabel = new JLabel();
+        scoreLabel = new JLabel();
 
         topPanel.add(healthLabel);
         topPanel.add(levelLabel);
+        topPanel.add(scoreLabel);
         topPanel.add(keyLabel);
 
         add(topPanel,BorderLayout.NORTH);
@@ -73,6 +76,7 @@ public class GameScreen extends JFrame {
 
         healthLabel.setText("❤️ Health: " + p.getHealth());
         levelLabel.setText("🏰 Level: " + p.getLevel());
+        scoreLabel.setText("⭐ Score: " + p.getScore());
         keyLabel.setText("🗝 Key: " + (p.hasKey() ? "YES" : "NO"));
 
     }

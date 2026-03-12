@@ -1,6 +1,4 @@
-public class Room {
+public abstract class Room {
 
-    public void enterRoom(Player player) {
-        System.out.println("You entered a room.");
-    }
+    public abstract void enterRoom(Player player);
 }
