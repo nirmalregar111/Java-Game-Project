@@ -49,6 +49,14 @@ public class Player {
         }
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public int getPotions() {
+        return potions;
+    }
+
     public void addPotion() {
         potions++;
     }

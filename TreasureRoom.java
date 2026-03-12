@@ -1,11 +1,7 @@
-import java.util.Scanner;
-
 public class TreasureRoom extends Room {
 
     @Override
     public void enterRoom(Player player) {
-
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("\n💎 You found a treasure room!");
         System.out.println("1. Open treasure chest");
