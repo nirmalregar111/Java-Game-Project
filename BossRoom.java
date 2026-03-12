@@ -3,11 +3,14 @@ import java.util.Scanner;
 public class BossRoom extends Room {
 
     private int bossHealth = 150;
+    private final Scanner sc;
+
+    public BossRoom(Scanner scanner) {
+        this.sc = scanner;
+    }
 
     @Override
     public void enterRoom(Player player) {
-
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("\n👑 FINAL BOSS ROOM!");
         System.out.println("Boss Health: " + bossHealth);

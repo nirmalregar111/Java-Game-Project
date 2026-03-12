@@ -1,12 +1,15 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
 
     private Player player;
     private Random random;
+    private Scanner scanner;
 
     public Game() {
         random = new Random();
+        scanner = new Scanner(System.in);
     }
 
     public void start(String playerName) {
@@ -17,7 +20,7 @@ public class Game {
 
             if (player.getLevel() == 3) {
 
-                Room boss = new BossRoom();
+                Room boss = new BossRoom(scanner);
 
                 while (!player.hasKey() && player.getHealth() > 0) {
                     boss.enterRoom(player);
@@ -29,10 +32,10 @@ public class Game {
             Room room;
 
             if (random.nextInt(2) == 0) {
-                room = new DangerRoom();
+                room = new DangerRoom(scanner);
             }
             else {
-                room = new TreasureRoom();
+                room = new TreasureRoom(scanner);
             }
 
             room.enterRoom(player);
