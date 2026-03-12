@@ -35,6 +35,18 @@ public class Player {
         return health;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getPotions() {
+        return potions;
+    }
+
     public int getLevel() {
         return level;
     }
