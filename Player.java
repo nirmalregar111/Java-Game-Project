@@ -66,6 +66,14 @@ public class Player {
         }
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public void showStatus() {
         System.out.println("Player: " + name);
         System.out.println("Health: " + health);

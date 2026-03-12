@@ -7,6 +7,10 @@ public class GameScreen extends JFrame {
     private JLabel healthLabel;
     private JLabel levelLabel;
     private JLabel keyLabel;
+    private JLabel scoreLabel;
+
+    private JButton searchBtn;
+    private JButton nextBtn;
 
     private GameEngine engine;
 
@@ -22,15 +26,17 @@ public class GameScreen extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel();
-        topPanel.setLayout(new GridLayout(1,3));
+        topPanel.setLayout(new GridLayout(1,4));
 
         healthLabel = new JLabel();
         levelLabel = new JLabel();
         keyLabel = new JLabel();
+        scoreLabel = new JLabel();
 
         topPanel.add(healthLabel);
         topPanel.add(levelLabel);
         topPanel.add(keyLabel);
+        topPanel.add(scoreLabel);
 
         add(topPanel,BorderLayout.NORTH);
 
@@ -44,8 +50,8 @@ public class GameScreen extends JFrame {
 
         JPanel buttonPanel = new JPanel();
 
-        JButton searchBtn = new JButton("Search Room");
-        JButton nextBtn = new JButton("Next Room");
+        searchBtn = new JButton("Search Room");
+        nextBtn = new JButton("Next Room");
 
         buttonPanel.add(searchBtn);
         buttonPanel.add(nextBtn);
@@ -53,13 +59,17 @@ public class GameScreen extends JFrame {
         add(buttonPanel,BorderLayout.SOUTH);
 
         searchBtn.addActionListener(e -> {
-            gameLog.append(engine.searchRoom() + "\n");
+            String result = engine.searchRoom();
+            gameLog.append(result + "\n");
             updateStats();
+            checkGameOver();
         });
 
         nextBtn.addActionListener(e -> {
-            gameLog.append(engine.nextRoom() + "\n");
+            String result = engine.nextRoom();
+            gameLog.append(result + "\n");
             updateStats();
+            checkGameOver();
         });
 
         updateStats();
@@ -74,6 +84,26 @@ public class GameScreen extends JFrame {
         healthLabel.setText("❤️ Health: " + p.getHealth());
         levelLabel.setText("🏰 Level: " + p.getLevel());
         keyLabel.setText("🗝 Key: " + (p.hasKey() ? "YES" : "NO"));
+        scoreLabel.setText("⭐ Score: " + p.getScore());
 
+    }
+
+    private void checkGameOver() {
+
+        Player p = engine.getPlayer();
+
+        if (p.getHealth() <= 0) {
+            gameLog.append("\n💀 GAME OVER! You have been defeated.\n");
+            endGame();
+        } else if (engine.isGameWon()) {
+            gameLog.append("\n🏆 CONGRATULATIONS! YOU ESCAPED THE DUNGEON!\n");
+            endGame();
+        }
+
+    }
+
+    private void endGame() {
+        searchBtn.setEnabled(false);
+        nextBtn.setEnabled(false);
     }
 }

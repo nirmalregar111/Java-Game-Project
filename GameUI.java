@@ -26,7 +26,7 @@ public class GameUI extends JFrame {
         buttons = new ArrayList<>();
 
         // Background Panel
-        bgPanel = new BackgroundPanel("Background.jpg");
+        bgPanel = new BackgroundPanel("background.jpg");
         bgPanel.setLayout(new GridBagLayout());
         setContentPane(bgPanel);
 
