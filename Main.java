@@ -7,9 +7,9 @@ public class Main {
 
     public static void main(String[] args) {
 
+        System.out.println("Enter Your name:");
         Scanner sc = new Scanner(System.in);
         playerName = sc.nextLine();
-        System.out.println("Enter Your name:");
 
         System.out.println("\n================================");
         System.out.println("WELCOME " + playerName.toUpperCase());
