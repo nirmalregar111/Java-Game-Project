@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
 
@@ -9,9 +10,21 @@ public class Game {
         random = new Random();
     }
 
-    public void start(String playerName) {
+    public void start(String playerName, Scanner sc) {
 
-        player = new Player(playerName);
+        boolean playAgain = true;
+        while (playAgain) {
+            player = new Player(playerName);
+            runGame(sc);
+            endGame();
+
+            System.out.print("\nPlay again? (yes/no): ");
+            String again = sc.nextLine().trim().toLowerCase();
+            playAgain = again.equals("yes") || again.equals("y");
+        }
+    }
+
+    private void runGame(Scanner sc) {
 
         while (!player.hasKey() && player.getHealth() > 0) {
 
@@ -20,7 +33,7 @@ public class Game {
                 Room boss = new BossRoom();
 
                 while (!player.hasKey() && player.getHealth() > 0) {
-                    boss.enterRoom(player);
+                    boss.enterRoom(player, sc);
                 }
 
                 break;
@@ -35,10 +48,8 @@ public class Game {
                 room = new TreasureRoom();
             }
 
-            room.enterRoom(player);
+            room.enterRoom(player, sc);
         }
-
-        endGame();
     }
 
     private void endGame() {

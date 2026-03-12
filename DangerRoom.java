@@ -3,9 +3,7 @@ import java.util.Scanner;
 public class DangerRoom extends Room {
 
     @Override
-    public void enterRoom(Player player) {
-
-        Scanner sc = new Scanner(System.in);
+    public void enterRoom(Player player, Scanner sc) {
 
         System.out.println("\n🔥 You entered a dangerous room!");
         System.out.println("1. Fight monster");
