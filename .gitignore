@@ -1,0 +1,24 @@
+# Compiled Java class files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Build output directories
+bin/
+build/
+out/
+target/
+
+# IDE project files
+.idea/
+*.iml
+*.iws
+*.ipr
+.eclipse/
+.classpath
+.project
+.settings/
+*.DS_Store
